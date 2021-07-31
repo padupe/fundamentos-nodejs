@@ -5,7 +5,14 @@ const app = express()
 app.use(express.json())
 const customers = []
 
-app.get('/account', (request, response) => {
+/**
+ * CPF - String
+ * NAME - String
+ * ID - uuid
+ * STATEMENT (Extrato): [] Array
+ */
+
+app.post('/account', (request, response) => {
     const { cpf, name } = request.body
     const id = uuidv4()
 
