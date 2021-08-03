@@ -45,7 +45,7 @@ app.post('/account', (request, response) => {
     customers.push({
         cpf,
         name,
-        id: uuidv4,
+        id: uuidv4(),
         statement: []
     });
 
@@ -110,5 +110,20 @@ app.get('/statement/date', verifyIfExistsAccountCPF, (request, response) => {
 
     return response.json(statement);
 });
+
+app.put('/account', verifyIfExistsAccountCPF, (request, response) => {
+    const { name } = request.body;
+    const { customer } = request;
+
+    customer.name = name;
+
+    return response.status(201).send();
+});
+
+app.get('/account', verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request;
+
+    return response.json(customer);
+})
 
 app.listen(2601);
